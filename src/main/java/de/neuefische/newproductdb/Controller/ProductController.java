@@ -26,4 +26,14 @@ public class ProductController {
     public Product addToTheList(@RequestBody Product product){
         return productService.addProductToList(product);
     }
+
+    @GetMapping("search")
+    public List<Product> search(@RequestParam(required = false) String q) {
+        if(q == null || q.isBlank()) {
+            return productService.getProductList();
+        }
+        return productService.search(q);
+    }
+
+
 }
